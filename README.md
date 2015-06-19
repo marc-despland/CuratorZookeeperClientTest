@@ -10,9 +10,9 @@ It possible to connect from teh serve to each of the 3 Zookeper nodes using zkCl
         at com.netflix.curator.CuratorZookeeperClient.getZooKeeper(CuratorZookeeperClient.java:74) ~[curator-client-0.6.4.jar:na]```
 
 And with a TCP Dump we saw that :
-Client (Curator) send a SYN packet to the Server (one of the Zookeeper node)
-Server answer by a SYN,ACK (that look well formed)
-Client answer by a RST that close the connection
+* Client (Curator) send a SYN packet to the Server (one of the Zookeeper node)
+* Server answer by a SYN,ACK (that look well formed)
+* Client answer by a RST that close the connection
 
 On other platform everything work well
 
