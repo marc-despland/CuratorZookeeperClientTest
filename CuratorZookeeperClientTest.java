@@ -1,4 +1,7 @@
 import com.netflix.curator.*;
+import org.apache.zookeeper.*;
+import org.apache.zookeeper.data.*;
+
 
 public class CuratorZookeeperClientTest implements RetryPolicy 	{
 
@@ -10,6 +13,7 @@ public class CuratorZookeeperClientTest implements RetryPolicy 	{
 
 	CuratorZookeeperClientTest test=new CuratorZookeeperClientTest();
 	CuratorZookeeperClient client=null;
+	ZooKeeper zk=null;
 
         System.out.println("CuratorZookeeperClientTest");
 
@@ -40,12 +44,26 @@ public class CuratorZookeeperClientTest implements RetryPolicy 	{
 		System.exit(0);
 	}
 	try {
-		org.apache.zookeeper.ZooKeeper zk=client.getZooKeeper();
+		zk=client.getZooKeeper();
+		System.out.println(zk.toString());
 	} catch(Exception e) {
                 System.out.println("Exception : "+e.getMessage());
                 e.printStackTrace();
 		System.exit(0);
         }
+	try {
+		Stat stat=zk.exists("/",false);
+		System.out.println(stat.toString());
+	} catch(KeeperException e) {
+                System.out.println("KeeperException : "+e.getMessage());
+                e.printStackTrace();
+                System.exit(0);
+        }  catch(InterruptedException e) {
+                System.out.println("Timeout");
+                System.exit(0);
+        }
+
+
     }
 
 }
